@@ -24,6 +24,8 @@ private:
 public:
 	Cycle();
 
+	bool isTrivial();
+
 	bool operator==(Cycle& other);
 	int& operator[](int n);
 	int operator[](int n) const;

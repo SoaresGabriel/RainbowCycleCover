@@ -11,9 +11,18 @@
 Cycle::Cycle() : bitset(Graph::getInstance().N), modified(true) {
 }
 
+bool Cycle::isTrivial(){
+	return (this->size() == 1);
+}
+
 bool Cycle::operator==(Cycle& other){
 	if(this->cycle.size() != other.cycle.size() || this->getBitset() != other.getBitset())
 		return false;
+
+	// se fores ciclos degenerados e tiver o mesmo bitset, sao iguais.
+	if(this->isTrivial()){
+		return true;
+	}
 
 	int N = this->cycle.size();
 	int j = 0;
