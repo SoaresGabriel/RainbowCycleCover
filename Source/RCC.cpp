@@ -5,6 +5,7 @@
 #include "RainbowCyclesSearch.h"
 #include "ReadData.h"
 #include "Util.h"
+#include "CycleList.h"
 #include <cstdlib>
 #include <ctime>
 
@@ -22,6 +23,9 @@ int main(int argc, char **argv) {
 	RainbowCyclesSearch rbs(graph);
 
 	unsigned int MAX_ITERATIONS = 50;
+	unsigned int MAX_CYCLES = graph.N*graph.N;
+
+	CycleList cycleList(MAX_CYCLES);
 
 	CycleCover bestSolution;
 	unsigned int minCoverWeight = graph.N*graph.N, coverWeight;
@@ -38,6 +42,8 @@ int main(int argc, char **argv) {
 			minCoverWeight = coverWeight;
 		}
 
+		cycleList.push_back(solution);
+
 	}
 
 	finalTime = clock();
@@ -45,6 +51,8 @@ int main(int argc, char **argv) {
 
 
 	printResult(bestSolution, executionTime, instance);
+
+	cout << endl << endl;
 
 	return 0;
 }
