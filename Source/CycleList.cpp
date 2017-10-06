@@ -7,7 +7,7 @@
 
 #include "CycleList.h"
 
-CycleList::CycleList(unsigned int maxQtCycles) : N(Graph::getInstance().N), MAX_CYCLES(maxQtCycles), vertexCycles(N) ,vertexCyclesBitset(N) {
+CycleList::CycleList(unsigned int maxQtCycles) : N(Graph::getInstance().N), MAX_CYCLES(maxQtCycles), vertexCyclesBitset(N), vertexCycles(N) {
 
 	cycles.reserve(MAX_CYCLES);
 
@@ -54,7 +54,7 @@ void CycleList::push_back(Cycle &cycle){
 
 void CycleList::push_back(CycleCover &cycleCover){
 	vector<Cycle>& cycles = cycleCover.getCycles();
-	for(int i = 0; i < cycles.size(); i++){
+	for(unsigned int i = 0; i < cycles.size(); i++){
 		this->push_back(cycles[i]);
 	}
 }
