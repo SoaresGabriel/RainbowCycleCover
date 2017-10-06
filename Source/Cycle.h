@@ -14,30 +14,11 @@
 using namespace std;
 using namespace boost;
 
-class Cycle {
-private:
-
-	vector<int> cycle;
-	dynamic_bitset<> bitset;
-	bool modified;
-
+class Cycle : public vector<int> {
 public:
-	Cycle();
-
 	bool isTrivial();
 
 	bool operator==(Cycle& other);
-	int& operator[](int n);
-	int operator[](int n) const;
-
-	void push_back(const unsigned int& v);
-	void pop_back();
-
-	size_t size();
-	void resize(const unsigned int &n);
-	void clear();
-
-	dynamic_bitset<>& getBitset();
 
 };
 
