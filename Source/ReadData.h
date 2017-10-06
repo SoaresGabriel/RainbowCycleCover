@@ -3,12 +3,21 @@
 
 #include <vector>
 #include <string>
+#include <fstream>
+#include <iostream>
+#include "Graph.h"
 
 using namespace std;
 
 class ReadData {
+	Graph &g;
+	string fileName;
+	int N, C;
+	void readUpperTriangularMatrix(ifstream& in);
+	void readRCCPAdjacencyList(ifstream& in);
 public:
-	static void read(string fileName);
+	ReadData(string fileName);
+	Graph& read();
 };
 
 #endif /* READDATA_H_ */

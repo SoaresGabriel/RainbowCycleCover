@@ -22,7 +22,8 @@ public:
 	vector<vector<int> > adjMatrix;
 	vector<list<int> > adjList;
 	
-	void setNC(int N, int C);
+	void setN(int N);
+	void setC(int C);
 	void reduce();
 	
 	// SINGLETON

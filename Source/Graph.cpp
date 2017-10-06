@@ -11,9 +11,8 @@ Graph& Graph::getInstance(){
 	return *instance;
 }
 
-void Graph::setNC(int N, int C){
+void Graph::setN(int N){
 	this->N = N;
-	this->C = C;
 	
 	adjMatrix.resize(N);
 	adjList.resize(N);
@@ -22,6 +21,10 @@ void Graph::setNC(int N, int C){
 		adjMatrix[i].resize(N);
 	}
 	
+}
+
+void Graph::setC(int C){
+	this->C = C;
 }
 
 int Graph::deleteSingleColor(){

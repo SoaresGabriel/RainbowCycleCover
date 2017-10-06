@@ -15,14 +15,12 @@ int main(int argc, char **argv) {
 	srand(time(0));
 
 	string instance = argv[1];
-
-	ReadData::read(instance);
 	
-	Graph &graph = Graph::getInstance();
+	Graph &graph = ReadData(instance).read();
 	
 	RainbowCyclesSearch rbs(graph);
 
-	unsigned int MAX_ITERATIONS = 50;
+	unsigned int MAX_ITERATIONS = 500;
 	unsigned int MAX_CYCLES = graph.N*graph.N;
 
 	CycleList cycleList(MAX_CYCLES);
