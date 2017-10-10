@@ -6,7 +6,6 @@
  */
 
 #include "Cycle.h"
-#include "Graph.h"
 
 bool Cycle::isTrivial(){
 	return (this->size() == 1);
@@ -45,7 +44,7 @@ bool Cycle::operator==(Cycle& other){
 			if(j < 0)
 				j = N-1;
 
-			if(this->at(1) != other[j])
+			if(this->at(a) != other[j])
 				return false;
 		}
 
