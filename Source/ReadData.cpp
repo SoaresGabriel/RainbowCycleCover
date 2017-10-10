@@ -19,7 +19,7 @@ Graph& ReadData::read(){
 	Graph &g = Graph::getInstance();
 
 	if(fileExtension == "rnd"){
-		readRCCPAdjacencyList(in);
+		readRCCPEdgesList(in);
 	}else{
 		readUpperTriangularMatrix(in);
 	}
@@ -58,7 +58,7 @@ void ReadData::readUpperTriangularMatrix(ifstream& in){
 
 }
 
-void ReadData::readRCCPAdjacencyList(ifstream& in){
+void ReadData::readRCCPEdgesList(ifstream& in){
 	string s = "";
 
 	while(s != "NUMBER_VERTICES:"){

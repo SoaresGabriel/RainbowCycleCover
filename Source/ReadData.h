@@ -14,7 +14,7 @@ class ReadData {
 	string fileName;
 	int N, C;
 	void readUpperTriangularMatrix(ifstream& in);
-	void readRCCPAdjacencyList(ifstream& in);
+	void readRCCPEdgesList(ifstream& in);
 public:
 	ReadData(string fileName);
 	Graph& read();
