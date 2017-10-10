@@ -8,7 +8,6 @@
 #ifndef CYCLECOVER_H_
 #define CYCLECOVER_H_
 
-#include <cmath>
 #include "Graph.h"
 #include "Cycle.h"
 

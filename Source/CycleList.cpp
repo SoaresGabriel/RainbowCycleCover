@@ -7,20 +7,29 @@
 
 #include "CycleList.h"
 
-CycleList::CycleList(unsigned int maxQtCycles) : N(Graph::getInstance().N), MAX_CYCLES(maxQtCycles), vertexCyclesBitset(N), vertexCycles(N) {
+CycleList::CycleList(unsigned int maxQtCycles) : N(Graph::getInstance().N), M((N/3)+1), MAX_CYCLES(maxQtCycles), vertexCyclesBitset(N), vertexCycles(N) {
 
 	cycles.reserve(MAX_CYCLES);
+
+	Cycle trivial;
+	trivial.resize(1);
 
 	for(unsigned int i = 0; i < N; i++){
 		vertexCyclesBitset[i].resize(maxQtCycles);
 		vertexCyclesBitset[i].reset();
+
+		// inclusao dos ciclos triviais
+		trivial[0] = i;
+		cycles.push_back(trivial);
+		vertexCyclesBitset[i].set(i);
+		vertexCycles[i].push_back(i);
 	}
 
 }
 
 void CycleList::push_back(Cycle &cycle){
 
-	if(cycles.size() == MAX_CYCLES)
+	if(cycles.size() == MAX_CYCLES || cycle.isTrivial())
 		return;
 
 	dynamic_bitset<> intersection;

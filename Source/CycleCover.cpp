@@ -7,9 +7,8 @@
 
 #include "CycleCover.h"
 
-CycleCover::CycleCover() : TRIVIAL_WEIGHT(ceil((double) Graph::getInstance().N / 3)), trivial(0), nonTrivial(0) {
-	if(Graph::getInstance().N % 3 == 0)
-		TRIVIAL_WEIGHT++;
+CycleCover::CycleCover() : TRIVIAL_WEIGHT((Graph::getInstance().N / 3)+1), trivial(0), nonTrivial(0) {
+
 }
 
 void CycleCover::push_back(Cycle& cycle){

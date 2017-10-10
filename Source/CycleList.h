@@ -14,8 +14,11 @@
 #include "CycleCover.h"
 
 class CycleList {
-private:
+public:
 	const unsigned int N; // graph.N
+	const unsigned int M; // peso dos ciclos triviais
+
+private:
 	const unsigned int MAX_CYCLES;
 	vector<dynamic_bitset<> > vertexCyclesBitset;
 
