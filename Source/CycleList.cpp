@@ -42,7 +42,7 @@ void CycleList::push_back(Cycle &cycle){
 	bool contains = false; // se a lista de ciclos atual ja tem esse ciclo
 
 	// percorre os elementos da intercessao
-	for(unsigned int i = intersection.find_first(); i != dynamic_bitset<>::npos; i = intersection.find_next(i)){
+	for(unsigned int i = intersection.find_first(); i < MAX_CYCLES; i = intersection.find_next(i)){
 		if(cycle == cycles[i]){
 			contains = true;
 			break;
@@ -62,8 +62,7 @@ void CycleList::push_back(Cycle &cycle){
 }
 
 void CycleList::push_back(CycleCover &cycleCover){
-	vector<Cycle>& cycles = cycleCover.getCycles();
-	for(unsigned int i = 0; i < cycles.size(); i++){
-		this->push_back(cycles[i]);
+	for(unsigned int i = 0; i < cycleCover.size(); i++){
+		this->push_back(cycleCover[i]);
 	}
 }
