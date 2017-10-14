@@ -1,10 +1,3 @@
-/*
- * Cycle.cpp
- *
- *  Created on: 27 de set de 2017
- *      Author: gabri
- */
-
 #include "Cycle.h"
 
 bool Cycle::isTrivial(){

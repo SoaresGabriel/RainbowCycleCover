@@ -1,10 +1,3 @@
-/*
- * ResultCover.h
- *
- *  Created on: 30 de set de 2017
- *      Author: gabri
- */
-
 #ifndef CYCLECOVER_H_
 #define CYCLECOVER_H_
 

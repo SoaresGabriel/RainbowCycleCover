@@ -1,10 +1,3 @@
-/*
- * Cycle.h
- *
- *  Created on: 27 de set de 2017
- *      Author: gabri
- */
-
 #ifndef CYCLE_H_
 #define CYCLE_H_
 

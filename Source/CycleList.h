@@ -1,10 +1,3 @@
-/*
- * CycleList.h
- *
- *  Created on: 2 de out de 2017
- *      Author: gabri
- */
-
 #ifndef CYCLELIST_H_
 #define CYCLELIST_H_
 
@@ -16,7 +9,7 @@
 class CycleList {
 public:
 	const unsigned int N; // graph.N
-	const unsigned int M; // peso dos ciclos triviais
+	const int M; // peso dos ciclos triviais
 
 private:
 	const unsigned int MAX_CYCLES;

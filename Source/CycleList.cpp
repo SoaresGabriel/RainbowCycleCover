@@ -1,10 +1,3 @@
-/*
- * CycleList.cpp
- *
- *  Created on: 2 de out de 2017
- *      Author: gabri
- */
-
 #include "CycleList.h"
 
 CycleList::CycleList(unsigned int maxQtCycles) : N(Graph::getInstance().N), M((N/3)+1), MAX_CYCLES(maxQtCycles), vertexCyclesBitset(N), vertexCycles(N) {

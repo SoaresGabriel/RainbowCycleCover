@@ -1,10 +1,3 @@
-/*
- * ResultCover.cpp
- *
- *  Created on: 30 de set de 2017
- *      Author: gabri
- */
-
 #include "CycleCover.h"
 
 CycleCover::CycleCover() : TRIVIAL_WEIGHT((Graph::getInstance().N / 3)+1), trivial(0), nonTrivial(0) {
