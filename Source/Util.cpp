@@ -71,7 +71,7 @@ void printResult(CycleCover &cover, long executionTime, string instance){
 
 		cout << endl;
 		}
-		cout << "Tempo de execucao: " << executionTime << " ms" << endl;
+		cout << endl << "Tempo de execucao: " << executionTime << " ms" << endl << endl;
 
 
 		/* imprime resultado no arquivo */

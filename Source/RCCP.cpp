@@ -6,6 +6,7 @@
 #include "ReadData.h"
 #include "Util.h"
 #include "CycleList.h"
+#include "RccpMIP.h"
 #include <cstdlib>
 #include <ctime>
 
@@ -44,11 +45,19 @@ int main(int argc, char **argv) {
 
 	}
 
+	cout << "Before Cplex: " << minCoverWeight << endl << endl;
+
+	CycleCover& solution = OptimizeRCCP(cycleList);
+	if(solution.weight() < minCoverWeight){
+		bestSolution = solution;
+	}
+
 	finalTime = clock();
 	long executionTime = ((finalTime - initialTime) / (CLOCKS_PER_SEC / 1000));
 
 
 	printResult(bestSolution, executionTime, instance);
+
 
 	cout << endl << endl;
 
