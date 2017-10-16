@@ -59,19 +59,12 @@ string getInstanceName(string instance){
 }
 
 void printResult(CycleCover &cover, long executionTime, string instance){
-	/*imprime resultado no terminal*/
-		cout << "Cover Weight: " << cover.weight() << endl;
-		cout << "Non Trivial Cycles: " << cover.nonTrivialCount() << endl;
-		cout << "Trivial Cycles: " << cover.trivialCount() << endl;
-		for (unsigned int i = 0; i < cover.size(); i++) {
-			cout << cover[i].size() << " : ";
-			for (unsigned int j = 0; j < cover[i].size(); j++) {
-				cout << cover[i][j] << " -> ";
-			}
-
-		cout << endl;
-		}
-		cout << endl << "Tempo de execucao: " << executionTime << " ms" << endl << endl;
+		/*imprime resultado no terminal*/
+		cout << "CYCLES: " << cover.size() << endl;
+		cout << "NON_TRIVIAL: " << cover.nonTrivialCount() << endl;
+		cout << "TRIVIAL: " << cover.trivialCount() << endl;
+		cout << "OBJ: " << cover.weight() << endl;
+		cout << endl << "TIME: " << executionTime << endl << endl;
 
 
 		/* imprime resultado no arquivo */
