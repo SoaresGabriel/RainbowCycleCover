@@ -2,10 +2,8 @@
 #define CYCLE_H_
 
 #include <vector>
-#include <boost/dynamic_bitset.hpp>
 
 using namespace std;
-using namespace boost;
 
 class Cycle : public vector<int> {
 public:

@@ -5,6 +5,9 @@
 #include "Graph.h"
 #include "Cycle.h"
 #include "CycleCover.h"
+#include <boost/dynamic_bitset.hpp>
+
+using namespace boost;
 
 class CycleList {
 public:

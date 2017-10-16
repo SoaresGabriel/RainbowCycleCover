@@ -79,9 +79,6 @@ bool RainbowCyclesSearch::findCycles(int v, int o, vector<bool> &visited) {
 		if (!hasColor[color]) {
 			if (dest == o) { // encontrou o ciclo
 				adjO = true;
-
-				//this->cycles.push_back(cycle);
-
 			}else if(visited[dest]){
 				continue;
 			} else {
@@ -95,7 +92,7 @@ bool RainbowCyclesSearch::findCycles(int v, int o, vector<bool> &visited) {
 			break;
 	}
 
-	if(!encontrou && adjO){ // origem é um vertice adjacente
+	if(!encontrou && adjO){ // origem ï¿½ um vertice adjacente
 		encontrou = true;
 		this->cycles.push_back(cycle);
 	}
