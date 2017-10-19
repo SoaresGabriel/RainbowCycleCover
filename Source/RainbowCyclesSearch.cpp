@@ -42,7 +42,7 @@ CycleCover& RainbowCyclesSearch::getRainbowCycles() {
 			cycle.clear();
 			vector<bool> visited(graph.N, false);
 			
-			if (findCycles(v, v, visited)) { // se encontrou um ciclo, deleta os vertices da lista de adjacencia
+			if (findCycles(v, v, visited, 1)) { // se encontrou um ciclo, deleta os vertices da lista de adjacencia
 				deleteCycleVertexFromAdjList(cycles.back());
 			}
 		}
@@ -66,7 +66,7 @@ CycleCover& RainbowCyclesSearch::getRainbowCycles() {
  * v -> vertice atual
  * o -> vertice de origem
  * */
-bool RainbowCyclesSearch::findCycles(int v, int o, vector<bool> &visited) {
+bool RainbowCyclesSearch::findCycles(int v, int o, vector<bool> &visited, int recursionLevel) {
 	visited[v] = true;
 	cycle.push_back(v);
 
@@ -81,9 +81,9 @@ bool RainbowCyclesSearch::findCycles(int v, int o, vector<bool> &visited) {
 				adjO = true;
 			}else if(visited[dest]){
 				continue;
-			} else {
+			} else if(recursionLevel < graph.C) { // tamanho do ciclo no menor ou igual ao numero de cores
 				hasColor[color] = true;
-				encontrou = findCycles(dest, o, visited);
+				encontrou = findCycles(dest, o, visited, recursionLevel + 1);
 				hasColor[color] = false;
 			}
 		}

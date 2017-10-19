@@ -17,11 +17,11 @@ private:
 	CycleCover cycles;
 	// diz se tem determinada cor no caminho do dfs
 	vector<bool> hasColor;
-	// diz quais vertices já fazem parte de um ciclo
+	// diz quais vertices jï¿½ fazem parte de um ciclo
 	vector<bool> inCycle;
 
 	void deleteCycleVertexFromAdjList(Cycle &cyclee);
-	bool findCycles(int v, int o, vector<bool> &visited);
+	bool findCycles(int v, int o, vector<bool> &visited, int recursionLevel);
 
 public:
 	RainbowCyclesSearch(Graph &graph);
