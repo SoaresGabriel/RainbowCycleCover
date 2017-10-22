@@ -9,10 +9,9 @@ class CycleCover {
 private:
 	unsigned int TRIVIAL_WEIGHT;
 
-	vector<Cycle> cycles;
-
-	unsigned int trivial;
-	unsigned int nonTrivial;
+	vector<Cycle> trivialCycles;
+	vector<Cycle> nonTrivialCycles;
+	bool lastAddTrivial = false;
 
 public:
 	CycleCover();
@@ -22,7 +21,8 @@ public:
 	unsigned int size();
 	void clear();
 
-	vector<Cycle>& getCycles();
+	vector<Cycle>& getNonTrivialCycles();
+	vector<Cycle>& getTrivialCycles();
 
 	unsigned int trivialCount();
 	unsigned int nonTrivialCount();

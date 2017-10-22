@@ -1,54 +1,62 @@
 #include "CycleCover.h"
 
-CycleCover::CycleCover() : TRIVIAL_WEIGHT((Graph::getInstance().N / 3)+1), trivial(0), nonTrivial(0) {
+CycleCover::CycleCover() : TRIVIAL_WEIGHT((Graph::getInstance().N / 3)+1) {
 
 }
 
 void CycleCover::push_back(Cycle& cycle){
-	cycles.push_back(cycle);
-	if(cycle.size() > 1)
-		nonTrivial++;
-	else
-		trivial++;
+	if(cycle.size() > 1){
+		lastAddTrivial = false;
+		nonTrivialCycles.push_back(cycle);
+	}else{
+		lastAddTrivial = true;
+		trivialCycles.push_back(cycle);
+	}
 }
 
 Cycle& CycleCover::back(){
-	return cycles.back();
+	return (lastAddTrivial? trivialCycles.back() : nonTrivialCycles.back() );
 }
 
 unsigned int CycleCover::size(){
-	return cycles.size();
+	return nonTrivialCycles.size() + trivialCycles.size();
 }
 
 void CycleCover::clear(){
-	cycles.clear();
-	trivial = 0;
-	nonTrivial = 0;
+	nonTrivialCycles.clear();
+	trivialCycles.clear();
 }
 
-vector<Cycle>& CycleCover::getCycles(){
-	return this->cycles;
+vector<Cycle>& CycleCover::getNonTrivialCycles(){
+	return nonTrivialCycles;
+}
+
+vector<Cycle>& CycleCover::getTrivialCycles(){
+	return nonTrivialCycles;
 }
 
 unsigned int CycleCover::trivialCount(){
-	return trivial;
+	return trivialCycles.size();
 }
 
 unsigned int CycleCover::nonTrivialCount(){
-	return nonTrivial;
+	return nonTrivialCycles.size();
 }
 
 unsigned int CycleCover::weight(){
-	return nonTrivial + TRIVIAL_WEIGHT * trivial;
+	return nonTrivialCount() + TRIVIAL_WEIGHT * trivialCount();
 }
 
 void CycleCover::operator=(CycleCover& toCopy){
-	this->cycles = toCopy.cycles;
+	this->nonTrivialCycles = toCopy.nonTrivialCycles;
+	this->trivialCycles = toCopy.trivialCycles;
 	this->TRIVIAL_WEIGHT = toCopy.TRIVIAL_WEIGHT;
-	this->trivial = toCopy.trivial;
-	this->nonTrivial = toCopy.nonTrivial;
+	this->lastAddTrivial = toCopy.lastAddTrivial;
 }
 
 Cycle& CycleCover::operator[](unsigned int& i){
-	return cycles[i];
+	if(i < nonTrivialCycles.size())
+		return nonTrivialCycles[i];
+	else
+		return trivialCycles[i - nonTrivialCycles.size()];
 }
