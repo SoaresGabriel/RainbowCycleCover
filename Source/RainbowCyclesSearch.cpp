@@ -1,9 +1,6 @@
 #include "RainbowCyclesSearch.h"
 #include "Util.h"
 
-#include <iostream>
-#include <cmath>
-
 RainbowCyclesSearch::RainbowCyclesSearch(Graph &graph) : graph(graph), adjList(graph.N) {
 	inCycle.resize(graph.N);
 	hasColor.resize(graph.C);
@@ -20,23 +17,22 @@ CycleCover& RainbowCyclesSearch::getRainbowCycles() {
 	for(int i = 0; i < graph.C; i++){
 		hasColor[i] = false;
 	}
-	
-	vector<int> visitOrder(graph.N);
+
+	visit.resize(graph.N);
 	for(int i = 0; i < graph.N; i++){
-		visitOrder[i] = i;
+		visit[i] = i;
 	}
 
-	/*ALEATORIZACAO*/
-	shakeArray(visitOrder);
+	// aleatoriza lista de adjacencia
 	for(int i = 0; i < graph.N; i++){
 		if(adjList[i].size() > 1)
 			shakeList(adjList[i]);
 	}
 
 	int v;
-	for (int i = 0; i < graph.N; i++) {
+	while(visit.size() > 0) {
 
-		v = visitOrder[i];
+		v = getNextVisitVertex();
 
 		if (!inCycle[v]) {
 			cycle.clear();
@@ -104,17 +100,17 @@ bool RainbowCyclesSearch::findCycles(int v, int o, vector<bool> &visited, int re
 
 void RainbowCyclesSearch::deleteCycleVertexFromAdjList(Cycle &cyclee) {
 
-
+	// marca vertices que já fazem parte de um ciclo
 	for (unsigned int i = 0; i < cyclee.size(); i++) {
 		inCycle[cyclee[i]] = true;
 	}
 
+	// deleta vertices da lista de adjacencia
 	for (int i = 0; i < graph.N; i++) {
 
 		if (inCycle[i]) {
 			adjList[i].clear();
 		} else if(adjList[i].size() > 0) {
-
 
 			for (list<int>::iterator it = adjList[i].begin(); it != adjList[i].end();) {
 
@@ -130,5 +126,73 @@ void RainbowCyclesSearch::deleteCycleVertexFromAdjList(Cycle &cyclee) {
 
 	}
 
+	// deleta vertices da lista a visitar
+	for(unsigned int i = 0; i < visit.size(); i++){
+		if(inCycle[visit[i]]){
+			visit[i] = visit[visit.size() - 1];
+			visit.pop_back();
+			i--; // verificar novamente posicao atual
+		}
+	}
 
+
+}
+
+class VisitComparator{
+private:
+	vector<int>& priority;
+public:
+	VisitComparator(vector<int>& priority) : priority(priority){
+
+	}
+
+	bool operator()(int v,int w) {
+		return priority[v] < priority[w];
+	}
+};
+
+void RainbowCyclesSearch::calculateVisitOrder(){
+
+	int M = 1; // numero total de arestas no grafo + 1
+
+	// calcula o grau colorido de cada vertice restante
+	vector<int> cDegree(graph.N, 0);
+	set<int> cdeg;
+	for(int v : visit){
+		cdeg.clear();
+
+		M += adjList[v].size();
+
+		for(int w : adjList[v]){
+			cdeg.insert(graph.adjMatrix[v][w]);
+		}
+
+		cDegree[v] = cdeg.size();
+	}
+
+	//calcula prioridade
+	vector<int> priority(graph.N);
+	for(int v : visit){
+		priority[v] = adjList[v].size()/M + cDegree[v]/graph.C;
+	}
+
+	// ordena de acordo com a prioridade
+	sort(visit.begin(), visit.end(), VisitComparator(priority));
+
+}
+
+int RainbowCyclesSearch::getNextVisitVertex(){
+
+	calculateVisitOrder();
+
+	// aleatoriza proximo vertice entre os 30% primeiros
+	int r = rand();
+	int pos = r % (int) ceil(visit.size() * 0.3);
+	int v = visit[pos];
+
+	//deleta vertice da lista a visitar
+	visit[pos] = visit[visit.size() - 1];
+	visit.pop_back();
+
+	return v;
 }

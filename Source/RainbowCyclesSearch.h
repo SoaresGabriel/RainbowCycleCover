@@ -3,6 +3,12 @@
 
 #include <vector>
 #include <list>
+#include <set>
+#include <algorithm>
+
+#include <iostream>
+#include <cmath>
+
 #include "Graph.h"
 #include "CycleCover.h"
 
@@ -20,6 +26,10 @@ private:
 	// diz quais vertices j� fazem parte de um ciclo
 	vector<bool> inCycle;
 
+	vector<int> visit;
+
+	void calculateVisitOrder();
+	int getNextVisitVertex();
 	void deleteCycleVertexFromAdjList(Cycle &cyclee);
 	bool findCycles(int v, int o, vector<bool> &visited, int recursionLevel);
 
