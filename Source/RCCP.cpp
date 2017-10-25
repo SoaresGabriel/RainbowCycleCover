@@ -18,11 +18,11 @@ int main(int argc, char **argv) {
 	string instance = argv[1];
 	
 	Graph &graph = ReadData(instance).read();
-	
-	RainbowCyclesSearch rbs(graph);
 
 	unsigned int MAX_ITERATIONS = 500;
 	unsigned int MAX_CYCLES = graph.N*graph.N;
+
+	RainbowCyclesSearch rbs(graph);
 
 	CycleList cycleList(MAX_CYCLES);
 

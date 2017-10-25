@@ -31,22 +31,17 @@ CycleCover& RainbowCyclesSearch::getRainbowCycles() {
 
 	int v;
 	while(visit.size() > 0) {
+		v = getNextVertex();
 
-		v = getNextVisitVertex();
+		cycle.clear();
+		vector<bool> visited(graph.N, false);
 
-		if (!inCycle[v]) {
-			cycle.clear();
-			vector<bool> visited(graph.N, false);
-			
-			if (findCycles(v, v, visited, 1)) { // se encontrou um ciclo, deleta os vertices da lista de adjacencia
-				deleteCycleVertexFromAdjList(cycles.back());
-			}
+		if (findCycles(v, v, visited, 1)) { // se encontrou um ciclo, deleta os vertices da lista de adjacencia
+			deleteCycleVertexFromAdjList(cycles.back());
 		}
 	}
 
-	/*
-	 * Cria ciclo degenerados com restante dos vertices
-	 * */
+	// Cria ciclo degenerados com restante dos vertices
 	cycle.resize(1);
 	for(int i = 0; i < graph.N; i++){
 		if(!inCycle[i]){ // se vertice nao faz parte de um ciclo, vira um degenerado
@@ -138,20 +133,7 @@ void RainbowCyclesSearch::deleteCycleVertexFromAdjList(Cycle &cyclee) {
 
 }
 
-class VisitComparator{
-private:
-	vector<int>& priority;
-public:
-	VisitComparator(vector<int>& priority) : priority(priority){
-
-	}
-
-	bool operator()(int v,int w) {
-		return priority[v] < priority[w];
-	}
-};
-
-void RainbowCyclesSearch::calculateVisitOrder(){
+int RainbowCyclesSearch::getNextVertex(){
 
 	int M = 1; // numero total de arestas no grafo + 1
 
@@ -177,17 +159,13 @@ void RainbowCyclesSearch::calculateVisitOrder(){
 	}
 
 	// ordena de acordo com a prioridade
-	sort(visit.begin(), visit.end(), VisitComparator(priority));
+	sort(visit.begin(), visit.end(), [&priority](int v, int w){
+		return priority[v] < priority[w];
+	});
 
-}
-
-int RainbowCyclesSearch::getNextVisitVertex(){
-
-	calculateVisitOrder();
 
 	// aleatoriza proximo vertice entre os 30% primeiros
-	int r = rand();
-	int pos = r % (int) ceil(visit.size() * 0.3);
+	int pos = rand() % (int) ceil(visit.size() * 0.3);
 	int v = visit[pos];
 
 	//deleta vertice da lista a visitar

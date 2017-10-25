@@ -28,8 +28,7 @@ private:
 
 	vector<int> visit;
 
-	void calculateVisitOrder();
-	int getNextVisitVertex();
+	int getNextVertex();
 	void deleteCycleVertexFromAdjList(Cycle &cyclee);
 	bool findCycles(int v, int o, vector<bool> &visited, int recursionLevel);
 
