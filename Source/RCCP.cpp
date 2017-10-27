@@ -24,9 +24,9 @@ int main(int argc, char **argv) {
 
 	RainbowCyclesSearch rbs(graph);
 
-	CycleList cycleList(MAX_CYCLES);
+	CycleList cycleList(graph, MAX_CYCLES);
 
-	CycleCover bestSolution;
+	CycleCover bestSolution(graph.getTrivialWeight());
 	unsigned int minCoverWeight = graph.N*graph.N, coverWeight;
 
 	clock_t initialTime = clock(), finalTime;

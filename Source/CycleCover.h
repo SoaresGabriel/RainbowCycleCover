@@ -14,7 +14,7 @@ private:
 	bool lastAddTrivial = false;
 
 public:
-	CycleCover();
+	CycleCover(unsigned int trivialWeight);
 
 	void push_back(Cycle& cycle);
 	Cycle& back();

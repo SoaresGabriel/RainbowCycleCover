@@ -10,7 +10,7 @@
 using namespace std;
 
 class ReadData {
-	Graph &g;
+	Graph *g;
 	string fileName;
 	int N, C;
 	void readUpperTriangularMatrix(ifstream& in);

@@ -1,6 +1,6 @@
 #include "Cycle.h"
 
-Cycle::Cycle(Graph &g) : g(g), colors(g.C, false) {
+Cycle::Cycle(Graph &g) : g(&g){
 
 }
 
@@ -25,8 +25,9 @@ int Cycle::at(size_type n) const{
 	return cycle.at(n);
 }
 
-void Cycle::push_back(const int& val){
-	cycle.push_back(val);
+void Cycle::push_back(const int& v){
+	cycle.push_back(v);
+
 }
 
 void Cycle::pop_back(){

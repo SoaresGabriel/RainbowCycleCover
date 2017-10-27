@@ -1,6 +1,6 @@
 #include "CycleCover.h"
 
-CycleCover::CycleCover() : TRIVIAL_WEIGHT((Graph::getInstance().N / 3)+1) {
+CycleCover::CycleCover(unsigned int trivialWeight) : TRIVIAL_WEIGHT(trivialWeight) {
 
 }
 

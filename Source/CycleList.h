@@ -22,7 +22,7 @@ public:
 	vector<Cycle> cycles;
 	vector<vector<int> > vertexCycles;
 
-	CycleList(unsigned int maxQtCycles);
+	CycleList(Graph& g, unsigned int maxQtCycles);
 
 	void push_back(Cycle &cycle);
 	void push_back(CycleCover &cycleCover);

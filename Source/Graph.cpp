@@ -2,29 +2,39 @@
 
 #include <iostream>
 
-Graph* Graph::instance = 0;
-
-Graph& Graph::getInstance(){
-	if(!instance)
-		instance = new Graph();
-	
-	return *instance;
-}
-
-void Graph::setN(int N){
-	this->N = N;
-	
+Graph::Graph(int N, int C) : N(N), C(C){
 	adjMatrix.resize(N);
 	adjList.resize(N);
-	
+
 	for(int i = 0; i < N; i++){
 		adjMatrix[i].resize(N);
+		for(int j = 0; j < N; j++){
+			adjMatrix[i][j] = C;
+		}
 	}
-	
 }
 
-void Graph::setC(int C){
-	this->C = C;
+const vector<list<int> >& Graph::getAdjList(){
+	return adjList;
+}
+
+
+int Graph::getColor(int v, int w){
+	return adjMatrix[v][w];
+}
+
+unsigned int Graph::getTrivialWeight(){
+	return (N/3) + 1;
+}
+
+void Graph::insert(int v, int w, int color){
+	if(color < C){
+		adjMatrix[v][w] = color;
+		adjMatrix[w][v] = color;
+
+		adjList[v].push_back(w);
+		adjList[w].push_back(v);
+	}
 }
 
 int Graph::deleteSingleColor(){

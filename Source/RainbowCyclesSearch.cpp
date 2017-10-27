@@ -1,14 +1,14 @@
 #include "RainbowCyclesSearch.h"
 #include "Util.h"
 
-RainbowCyclesSearch::RainbowCyclesSearch(Graph &graph) : graph(graph), adjList(graph.N), cycle(graph) {
+RainbowCyclesSearch::RainbowCyclesSearch(Graph &graph) : graph(graph), adjList(graph.N), cycle(graph), cycles(graph.getTrivialWeight()) {
 	inCycle.resize(graph.N);
 	hasColor.resize(graph.C);
 }
 
 CycleCover& RainbowCyclesSearch::getRainbowCycles() {
 
-	adjList = graph.adjList;
+	adjList = graph.getAdjList();
 	cycles.clear();
 
 	for (int i = 0; i < graph.N; i++) {
@@ -66,7 +66,7 @@ bool RainbowCyclesSearch::findCycles(int v, int o, vector<bool> &visited, int re
 	bool encontrou = false, adjO = false;
 	
 	for (int &dest : adjList[v]) {
-		color = graph.adjMatrix[v][dest];
+		color = graph.getColor(v, dest);
 
 		if (!hasColor[color]) {
 			if (dest == o) { // encontrou o ciclo
@@ -147,7 +147,7 @@ int RainbowCyclesSearch::getNextVertex(){
 		M += adjList[v].size();
 
 		for(int w : adjList[v]){
-			cdeg.insert(graph.adjMatrix[v][w]);
+			cdeg.insert(graph.getColor(v, w));
 		}
 
 		cDegree[v] = cdeg.size();

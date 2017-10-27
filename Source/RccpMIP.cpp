@@ -46,7 +46,7 @@ CycleCover& OptimizeRCCP(CycleList &cl) {
 	RCCP.solve();
 
 	// Constroe CycleCover da solução
-	CycleCover& cover = *(new CycleCover());
+	CycleCover& cover = *(new CycleCover((cl.N/3)+1));
 
 	for (int i = 0; i < n; i++) {
 		if (RCCP.getValue(x[i]) > 0.99){

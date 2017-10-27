@@ -8,26 +8,27 @@ using namespace std;
 
 class Graph {
 private:
-	static Graph* instance;
-	Graph(): N(0), C(0){
-	}
-	
 	int deleteSingleColor();
 	int deleteBridges();
 	int deleteBridgesAux(int parent, int vertex, int &time, vector<int> &discoveryTime, vector<int> &low, int &bridges);
-
-public:
-	int N;
-	int C;
 	vector<vector<int> > adjMatrix;
 	vector<list<int> > adjList;
+
+public:
+	const int N;
+	const int C;
+
+	Graph(int N, int C);
+
+	const vector<list<int> >& getAdjList();
 	
-	void setN(int N);
-	void setC(int C);
+	int getColor(int v, int w);
+	unsigned int getTrivialWeight();
+
+	void insert(int v, int w, int color);
+
 	void reduce();
 	
-	// SINGLETON
-	static Graph& getInstance();
 };
 
 #endif /* READDATA_H_ */

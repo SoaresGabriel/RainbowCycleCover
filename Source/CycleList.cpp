@@ -1,10 +1,10 @@
 #include "CycleList.h"
 
-CycleList::CycleList(unsigned int maxQtCycles) : N(Graph::getInstance().N), M((N/3)+1), MAX_CYCLES(maxQtCycles), vertexCyclesBitset(N), vertexCycles(N) {
+CycleList::CycleList(Graph &g, unsigned int maxQtCycles) : N(g.N), M((N/3)+1), MAX_CYCLES(maxQtCycles), vertexCyclesBitset(N), vertexCycles(N) {
 
 	cycles.reserve(MAX_CYCLES);
 
-	Cycle trivial(Graph::getInstance());
+	Cycle trivial(g);
 
 	for(unsigned int i = 0; i < N; i++){
 		vertexCyclesBitset[i].resize(maxQtCycles);
