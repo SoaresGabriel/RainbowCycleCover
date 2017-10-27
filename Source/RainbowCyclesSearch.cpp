@@ -1,7 +1,7 @@
 #include "RainbowCyclesSearch.h"
 #include "Util.h"
 
-RainbowCyclesSearch::RainbowCyclesSearch(Graph &graph) : graph(graph), adjList(graph.N) {
+RainbowCyclesSearch::RainbowCyclesSearch(Graph &graph) : graph(graph), adjList(graph.N), cycle(graph) {
 	inCycle.resize(graph.N);
 	hasColor.resize(graph.C);
 }
@@ -42,11 +42,12 @@ CycleCover& RainbowCyclesSearch::getRainbowCycles() {
 	}
 
 	// Cria ciclo degenerados com restante dos vertices
-	cycle.resize(1);
+	cycle.clear();
 	for(int i = 0; i < graph.N; i++){
 		if(!inCycle[i]){ // se vertice nao faz parte de um ciclo, vira um degenerado
-			cycle[0] = i;
+			cycle.push_back(i);
 			cycles.push_back(cycle);
+			cycle.pop_back();
 		}
 	}
 

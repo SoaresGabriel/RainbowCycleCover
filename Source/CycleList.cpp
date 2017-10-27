@@ -4,16 +4,16 @@ CycleList::CycleList(unsigned int maxQtCycles) : N(Graph::getInstance().N), M((N
 
 	cycles.reserve(MAX_CYCLES);
 
-	Cycle trivial;
-	trivial.resize(1);
+	Cycle trivial(Graph::getInstance());
 
 	for(unsigned int i = 0; i < N; i++){
 		vertexCyclesBitset[i].resize(maxQtCycles);
 		vertexCyclesBitset[i].reset();
 
 		// inclusao dos ciclos triviais
-		trivial[0] = i;
+		trivial.push_back(i);
 		cycles.push_back(trivial);
+		trivial.pop_back();
 		vertexCyclesBitset[i].set(i);
 		vertexCycles[i].push_back(i);
 	}

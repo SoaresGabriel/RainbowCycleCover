@@ -1,7 +1,40 @@
 #include "Cycle.h"
 
+Cycle::Cycle(Graph &g) : g(g), colors(g.C, false) {
+
+}
+
+void Cycle::operator=(const Cycle& x){
+	this->g = x.g;
+	this->cycle = x.cycle;
+}
+
 bool Cycle::isTrivial(){
 	return (this->size() == 1);
+}
+
+vector<int>::size_type Cycle::size() const{
+	return cycle.size();
+}
+
+int Cycle::operator[](size_type n) const{
+	return cycle[n];
+}
+
+int Cycle::at(size_type n) const{
+	return cycle.at(n);
+}
+
+void Cycle::push_back(const int& val){
+	cycle.push_back(val);
+}
+
+void Cycle::pop_back(){
+	cycle.pop_back();
+}
+
+void Cycle::clear(){
+	cycle.clear();
 }
 
 bool Cycle::operator==(Cycle& other){
