@@ -32,7 +32,7 @@ vector<Cycle>& CycleCover::getNonTrivialCycles(){
 }
 
 vector<Cycle>& CycleCover::getTrivialCycles(){
-	return nonTrivialCycles;
+	return trivialCycles;
 }
 
 unsigned int CycleCover::trivialCount(){
