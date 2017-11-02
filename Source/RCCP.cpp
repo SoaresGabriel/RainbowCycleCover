@@ -6,6 +6,7 @@
 #include "ReadData.h"
 #include "Util.h"
 #include "CycleList.h"
+#include "LocalSearch.h"
 #include "RccpMIP.h"
 #include <cstdlib>
 #include <ctime>
@@ -26,6 +27,8 @@ int main(int argc, char **argv) {
 
 	CycleList cycleList(graph, MAX_CYCLES);
 
+	LocalSearch localSearch(graph, cycleList);
+
 	CycleCover bestSolution(graph.getTrivialWeight());
 	unsigned int minCoverWeight = graph.N*graph.N, coverWeight;
 
@@ -36,12 +39,14 @@ int main(int argc, char **argv) {
 		CycleCover& solution = rbs.getRainbowCycles();
 		coverWeight = solution.weight();
 
+		cycleList.push_back(solution);
+
+		while(localSearch.trivialInsertion(solution));
+
 		if(coverWeight < minCoverWeight){
 			bestSolution = solution;
 			minCoverWeight = coverWeight;
 		}
-
-		cycleList.push_back(solution);
 
 	}
 

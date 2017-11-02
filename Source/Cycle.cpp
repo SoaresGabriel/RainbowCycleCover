@@ -1,20 +1,53 @@
 #include "Cycle.h"
 
 Cycle::Cycle(Graph &g) : g(&g){
-
+	colors.resize(g.C);
+	colors.reset();
 }
 
 void Cycle::operator=(const Cycle& x){
 	this->g = x.g;
 	this->cycle = x.cycle;
+	this->colors = x.colors;
+}
+
+void Cycle::closeCycle(){
+
+	colors[g->getColor(cycle.back(), cycle[0])] = true;
+
+	for(unsigned int i = 1; i < size(); i++){
+		colors[g->getColor(cycle[i-1], cycle[i])] = true;
+	}
+
 }
 
 bool Cycle::isTrivial(){
 	return (this->size() == 1);
 }
 
+bool Cycle::hasColor(int color){
+	return colors[color];
+}
+
 vector<int>::size_type Cycle::size() const{
 	return cycle.size();
+}
+
+void Cycle::insert(size_type pos, int v){
+	colors[g->getColor(cycle[pos-1], cycle[pos])] = false;;
+	colors[g->getColor(cycle[pos-1], v)] = true;
+	colors[g->getColor(v, cycle[pos])] = true;
+
+	//readiciona o ultimo elemento ao ciclo
+	cycle.push_back(cycle.back());
+
+	// desloca todos os elementos para uma casa apos
+	for(unsigned int i = cycle.size() - 2; i > pos; i--){
+		cycle[i] = cycle[i-1];
+	}
+
+	cycle[pos] = v;
+
 }
 
 int Cycle::operator[](size_type n) const{
@@ -27,7 +60,6 @@ int Cycle::at(size_type n) const{
 
 void Cycle::push_back(const int& v){
 	cycle.push_back(v);
-
 }
 
 void Cycle::pop_back(){
@@ -36,6 +68,7 @@ void Cycle::pop_back(){
 
 void Cycle::clear(){
 	cycle.clear();
+	colors.reset();
 }
 
 bool Cycle::operator==(Cycle& other){

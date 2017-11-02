@@ -86,6 +86,7 @@ bool RainbowCyclesSearch::findCycles(int v, int o, vector<bool> &visited, int re
 
 	if(!encontrou && adjO){ // origem � um vertice adjacente
 		encontrou = true;
+		cycle.closeCycle();
 		this->cycles.push_back(cycle);
 	}
 
