@@ -13,6 +13,8 @@ void Cycle::operator=(const Cycle& x){
 
 void Cycle::closeCycle(){
 
+	colors.reset();
+
 	colors[g->getColor(cycle.back(), cycle[0])] = true;
 
 	for(unsigned int i = 1; i < size(); i++){

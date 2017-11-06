@@ -1,7 +1,7 @@
 #include "RainbowCyclesSearch.h"
 #include "Util.h"
 
-RainbowCyclesSearch::RainbowCyclesSearch(Graph &graph) : graph(graph), adjList(graph.N), cycle(graph), cycles(graph.getTrivialWeight()) {
+RainbowCyclesSearch::RainbowCyclesSearch(Graph &graph, CycleList& cycleList) : graph(graph), adjList(graph.N), cycle(graph), cycles(graph.getTrivialWeight()), cycleList(cycleList) {
 	inCycle.resize(graph.N);
 	hasColor.resize(graph.C);
 }
@@ -70,6 +70,10 @@ bool RainbowCyclesSearch::findCycles(int v, int o, vector<bool> &visited, int re
 
 		if (!hasColor[color]) {
 			if (dest == o) { // encontrou o ciclo
+
+				cycle.closeCycle();
+				cycleList.push_back(cycle);
+
 				adjO = true;
 			}else if(visited[dest]){
 				continue;

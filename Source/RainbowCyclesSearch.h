@@ -11,6 +11,7 @@
 
 #include "Graph.h"
 #include "CycleCover.h"
+#include "CycleList.h"
 
 using namespace std;
 
@@ -21,6 +22,7 @@ private:
 
 	Cycle cycle;
 	CycleCover cycles;
+	CycleList& cycleList;
 	// diz se tem determinada cor no caminho do dfs
 	vector<bool> hasColor;
 	// diz quais vertices j� fazem parte de um ciclo
@@ -33,7 +35,7 @@ private:
 	bool findCycles(int v, int o, vector<bool> &visited, int recursionLevel);
 
 public:
-	RainbowCyclesSearch(Graph &graph);
+	RainbowCyclesSearch(Graph &graph, CycleList& cycleList);
 	CycleCover& getRainbowCycles();
 };
 

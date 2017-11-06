@@ -23,9 +23,9 @@ int main(int argc, char **argv) {
 	unsigned int MAX_ITERATIONS = 500;
 	unsigned int MAX_CYCLES = graph.N*graph.N;
 
-	RainbowCyclesSearch rbs(graph);
-
 	CycleList cycleList(graph, MAX_CYCLES);
+
+	RainbowCyclesSearch rbs(graph, cycleList);
 
 	LocalSearch localSearch(graph, cycleList);
 
@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
 		CycleCover& solution = rbs.getRainbowCycles();
 		coverWeight = solution.weight();
 
-		cycleList.push_back(solution);
+		//cycleList.push_back(solution);
 
 		while(localSearch.trivialInsertion(solution));
 
